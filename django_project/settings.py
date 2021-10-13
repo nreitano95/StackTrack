@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-b(98$8-e4v&9564#reo598+jmpcbrzq%zvf8uzwit6vp&%&537
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.whatsyourpercent.com', '127.0.0.1']
+ALLOWED_HOSTS = ['https://stacktrack-osu.herokuapp.com/', '127.0.0.1']
 
 # Application definition
 
@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'organizations.apps.OrganizationsConfig',
+    'opportunities.apps.opportunitiesConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
     'storages',
@@ -86,12 +86,12 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME':'wl5l4w9hunfs8gol',
-        'USER': 'zq6m4luctjblid7s',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':'ddcm2q34clbltu',
+        'USER': 'vlpvpufvknhoxx',
         'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': 'ao9moanwus0rjiex.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
-        'PORT': '3306',
+        'HOST': 'ec2-18-215-96-54.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -146,7 +146,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Point to login page
-LOGIN_REDIRECT_URL = 'organizations-home'
+LOGIN_REDIRECT_URL = 'opportunities-home'
 LOGIN_URL = 'login'
 
 # Password Reset
@@ -158,7 +158,7 @@ EMAIL_HOST_USER = os.environ.get("EMAIL_USER")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_PASS")
 
 
-# AWS Storage
+# AWS Storage (used for storing photos such as user profile pictures)
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_ACCESS_SECRET_ACCESS_KEY = os.environ.get('AWS_ACCESS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')

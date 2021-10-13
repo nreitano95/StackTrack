@@ -107,11 +107,6 @@ a, a:link, a:hover, a:active {
   width: 350px;
 }
 
-#addToFavorites {
-  color: white !important;
-  border-radius: 34px;
-  width: 190px;
-}
 
 #featuredOrgs {
   margin-top: 100px;
@@ -141,10 +136,6 @@ a, a:link, a:hover, a:active {
   box-shadow: 0 0 0 0.2rem rgba(116, 201, 71, 0.25);
 }
 
-.favorites {
-  text-align: center;
-  margin-top: 50px;
-}
 
 @media screen and (max-width: 1000px) {
 /* Hide Table Columns on Mobile */

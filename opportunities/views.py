@@ -1,0 +1,26 @@
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.core.paginator import Paginator 
+# from .models import <name of model class here>
+import requests
+import json
+import os 
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
+
+
+def home(request):
+    """ Renders the Home page """ 
+
+    return render(request, 'opportunities/home.j2')
+
+
+
+def about(request):
+    """ Renders the About page """
+    return render(request, 'opportunities/about.j2', {'title': 'About'})
+
+    
