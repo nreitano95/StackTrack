@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-b(98$8-e4v&9564#reo598+jmpcbrzq%zvf8uzwit6vp&%&537
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://stacktrack-osu.herokuapp.com/', '127.0.0.1']
+ALLOWED_HOSTS = ['stacktrack-osu.herokuapp.com/', '127.0.0.1']
 
 # Application definition
 
