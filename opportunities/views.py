@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 
 # from .models import <name of model class here>
+from .models import Job
 import requests
 import json
 import os
@@ -27,8 +28,10 @@ def about(request):
 
 def jobs(request):
     """Renders the Jobs page"""
-
-    return render(request, "opportunities/jobs.j2")
+    context = {
+        'jobs' : Job.objects.all()
+    }
+    return render(request, "opportunities/jobs.j2", context)
 
 
 def internships(request):

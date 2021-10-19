@@ -6,6 +6,12 @@
 
 {% block content %}
 
-<h1> JOBS </h1>
+    <h1> JOBS </h1>
+    
+    {% for job in jobs %}
+        {{job.title}}
+        {{job.company}}
+    {% endfor %}
+
 
 {% endblock content %}
