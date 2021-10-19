@@ -1,0 +1,17 @@
+{% extends "opportunities/base.j2" %}
+
+{% block title %}
+    Jobs
+{% endblock %}
+
+{% block content %}
+
+    <h1> JOBS </h1>
+    
+    {% for job in jobs %}
+        {{job.title}}
+        {{job.company}}
+    {% endfor %}
+
+
+{% endblock content %}
