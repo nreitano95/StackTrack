@@ -7,11 +7,57 @@
 {% block content %}
 
     <h1> JOBS </h1>
-    
-    {% for job in jobs %}
-        {{job.title}}
-        {{job.company}}
-    {% endfor %}
+
+    {% if not jobs %}
+        <div class="container">
+            <div class="jobs">
+                <h4>No jobs tracked yet</h4>
+            </div> 
+
+        </div>
+    {% else %}
+
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-12">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Company</th>
+                            <th>Title</th>
+                            <th>Employment Type</th>
+                            <th>Salary</th>
+                            <th>Description</th>
+                            <th>Application Status</th>
+                            <th>Application Date</th>
+                            <th colspan="2"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for job in jobs %}
+                        <tr>
+                            <td>{{ job.company }}</td>
+                            <td>{{ job.title }}</td>
+                            <td>{{ job.employment_type }}</td>
+                            <td>{{ job.salary }}</td>
+                            <td>{{ job.description }}</td>
+                            <td>{{ job.application_status }}</td>
+                            <td>{{job.application_date|date:'Y-m-d'}}</td>
+                            {# Update job #}
+                            <td>
+                                <a href="#" class="btn btn-secondary">Update</a>
+                            </td>
+                            <td>
+                                {#  Delete a job #}
+                                <a href="{% url 'opportunities-delete-job' job_id=job.id %}" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
 
 
 {% endblock content %}
