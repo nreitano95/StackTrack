@@ -28,9 +28,7 @@ def about(request):
 
 def jobs(request):
     """Renders the Jobs page"""
-    context = {
-        'jobs' : Job.objects.all()
-    }
+    context = {"jobs": Job.objects.all()}
     return render(request, "opportunities/jobs.j2", context)
 
 
@@ -38,3 +36,9 @@ def internships(request):
     """Renders the Internships page"""
 
     return render(request, "opportunities/internships.j2")
+
+
+def user_skills(request):
+    """Renders a user's skills"""
+    context = {"skills": Skills.objects.all()}
+    return render(request, "opportunities/userSkills.j2", context)
