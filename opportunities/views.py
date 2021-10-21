@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 
 # from .models import <name of model class here>
-from .models import Job
+from .models import Job, Skills
 import requests
 import json
 import os
