@@ -1,0 +1,15 @@
+{% extends "opportunities/base.j2" %}
+
+{% block title %}
+    My Skills
+{% endblock %}
+
+{% block content %}
+
+    <h1> Skills </h1>
+    
+    {% for skill in skills %}
+        {{skill.name}}
+    {% endfor %}
+
+{% endblock content %}
