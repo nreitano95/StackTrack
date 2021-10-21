@@ -28,13 +28,18 @@ def about(request):
 
 def jobs(request):
     """Renders the Jobs page"""
-    context = {
-        'jobs' : Job.objects.all()
-    }
+    context = {"jobs": Job.objects.filter(author=request.user).all()}
     return render(request, "opportunities/jobs.j2", context)
 
 
-def internships(request):
-    """Renders the Internships page"""
-
-    return render(request, "opportunities/internships.j2")
+def delete_job(request, job_id):
+    """Deletes job entry"""
+    # Delete job from database if matching id is found.
+    try: 
+        request.user.job_set.get(id=job_id).delete()
+        # User_Favorites.objects.get(ukey=ukey).delete()
+        messages.success(request, f'Job Deleted from Job List')
+    except: 
+        messages.warning(request, f'Unable to delete job...')
+    finally:
+        return redirect("opportunities-jobs")
