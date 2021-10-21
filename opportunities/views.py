@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 
 # from .models import <name of model class here>
-from .models import Job
+from .models import Job, Skills
 import requests
 import json
 import os
@@ -43,3 +43,17 @@ def delete_job(request, job_id):
         messages.warning(request, f'Unable to delete job...')
     finally:
         return redirect("opportunities-jobs")
+    context = {"jobs": Job.objects.all()}
+    return render(request, "opportunities/jobs.j2", context)
+
+
+def internships(request):
+    """Renders the Internships page"""
+
+    return render(request, "opportunities/internships.j2")
+
+
+def user_skills(request):
+    """Renders a user's skills"""
+    context = {"skills": Skills.objects.all()}
+    return render(request, "opportunities/userSkills.j2", context)
