@@ -30,12 +30,12 @@
             <div class="navbar-nav mr-auto">
               <a class="nav-item nav-link" href="{% url 'opportunities-home' %}">Home</a>
               <a class="nav-item nav-link" href="{% url 'opportunities-about' %}">About</a>
-              <a class="nav-item nav-link" href="{% url 'opportunities-jobs' %}">Jobs</a>
 
 
             </div>
             <div class="navbar-nav">
               {% if user.is_authenticated %}
+                <a class="nav-item nav-link" href="{% url 'opportunities-jobs' %}">Jobs</a>
                 <a class="nav-item nav-link" href="{% url 'user-skills' %}">Skills</a>
                 <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>            
                 <a class="nav-item nav-link" href="{% url 'logout' %}">Log Out</a>            
