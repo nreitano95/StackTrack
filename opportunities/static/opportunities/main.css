@@ -5,7 +5,7 @@
   --base-body-color: #333;
   --base-heading-color: #555;
   --base-main-accent-color: #4361ee;
-  --base-main-accent-hover: #3f37c9;
+  --base-main-accent-hover: #3a0ca3;
   --base-main-accent-box-shadow: rgba(71, 90, 201, 0.25);
   --base-main-accent-btn-border: #6f87f3;
 }
@@ -90,7 +90,7 @@ a:hover {
   }
   
   #register:hover {
-    background-color: var(--base-main-accent-color);
+    background-color: var(--base-main-accent-hover);
     box-shadow: 0 0 0 0.2rem var(--base-main-accent-box-shadow) !important;
   }
 }
