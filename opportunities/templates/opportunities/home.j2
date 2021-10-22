@@ -7,10 +7,24 @@
 {% block content %}
 
 <div class="jumbotron">
-  <h1 class="display-4">Lorem Ipsum</h1>
-  <p class="lead">Lorem Ipsum</p>
+  {% if user.is_authenticated %}
+  <h1 class="display-4">Welcome Back to StackTrack!</h1>
+  <p class="lead">Easily track your job applications so you can get hired</p>
   <hr class="my-4">
- 
+    <p>View the jobs you are tracking</p>
+    <a class="btn btn-primary" href="{% url 'opportunities-jobs' %}" role="button">My Jobs</a>
+  {% else %}
+  <h1 class="display-4">Welcome to StackTrack!</h1>
+  <p class="lead">Easily track your job applications so you can get hired</p>
+  <hr class="my-4">
+    <p>Sign up to start tracking your job applications</p>
+    <a class="btn btn-primary" href="{% url 'register' %}" role="button">Get Started</a>
+    <div class="pt-1">
+      <small class='text-muted'>
+          Already Have an Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+      </small>
+    </div>
+  {% endif %}
 </div>
 
 <div class="container">
