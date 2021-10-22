@@ -7,6 +7,7 @@ from django.core.paginator import Paginator
 
 # from .models import <name of model class here>
 from .models import Job, Skills
+from .forms import AddJobForm
 import requests
 import json
 import os
@@ -26,25 +27,32 @@ def about(request):
     return render(request, "opportunities/about.j2", {"title": "About"})
 
 
+@login_required
 def jobs(request):
     """Renders the Jobs page"""
     context = {"jobs": Job.objects.filter(author=request.user).all()}
+
+    # add job form
+    form = AddJobForm(request.POST or None, initial={'author':request.user})
+    if form.is_valid():
+        form.save()
+    context['form'] = form
+
     return render(request, "opportunities/jobs.j2", context)
 
 
+@login_required
 def delete_job(request, job_id):
     """Deletes job entry"""
     # Delete job from database if matching id is found.
-    try: 
+    try:
         request.user.job_set.get(id=job_id).delete()
         # User_Favorites.objects.get(ukey=ukey).delete()
-        messages.success(request, f'Job Deleted from Job List')
-    except: 
-        messages.warning(request, f'Unable to delete job...')
+        messages.success(request, "Job Deleted from Job List")
+    except Job.DoesNotExist:
+        messages.warning(request, "Unable to delete job...")
     finally:
         return redirect("opportunities-jobs")
-    context = {"jobs": Job.objects.all()}
-    return render(request, "opportunities/jobs.j2", context)
 
 
 def internships(request):
