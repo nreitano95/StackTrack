@@ -146,6 +146,9 @@ a:hover {
   box-shadow: 0 0 0 0.2rem var(--base-main-accent-box-shadow);
 }
 
+#pw-reset {
+  width: 25%;
+}
 
 @media screen and (max-width: 1000px) {
 /* Hide Table Columns on Mobile */
