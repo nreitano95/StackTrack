@@ -31,7 +31,9 @@ urlpatterns = [
     path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name="users/password_reset_complete.j2"), name='password_reset_complete'),
     path('password-change/', user_views.password_change, name='password_change'),
     path('profile/', user_views.profile, name='profile'),
+    path('accounts/', include('allauth.urls')),
     path('', include('opportunities.urls')),
+    
 ]
 
 if settings.DEBUG:

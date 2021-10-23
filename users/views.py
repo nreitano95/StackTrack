@@ -5,6 +5,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 
+
 def register(request):
     """ Creates a user with data from the register form """
 
