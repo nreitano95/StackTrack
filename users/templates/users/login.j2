@@ -1,11 +1,14 @@
 {% extends 'opportunities/base.j2' %}
 {% load crispy_forms_tags %}
+{% load socialaccount %}
 
 {% block title %}
     Sign In
 {% endblock %}
 
 {% block content %}
+
+    <a href="{% provider_login_url 'google' %}">Login with Google</a>
 
     <div class='content-section'>
         <form method="POST">
