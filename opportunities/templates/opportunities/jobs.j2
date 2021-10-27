@@ -76,7 +76,7 @@
                             <td>{{job.application_date|date:'Y-m-d'}}</td>
                             {# Update job #}
                             <td>
-                                <a href="#" class="btn btn-secondary">Update</a>
+                                <a href="{% url 'opportunities-update-job' job_id=job.id %}" class="btn btn-secondary">Update</a>
                             </td>
                             <td>
                                 {#  Delete a job #}

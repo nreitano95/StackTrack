@@ -6,20 +6,21 @@
 
 {% block content %}
 
-<div class="jumbotron">
-  <h1 class="display-4">Lorem Ipsum</h1>
-  <p class="lead">Lorem Ipsum</p>
-  <hr class="my-4">
- 
-</div>
-
 <div class="container">
+  <div class="main">
+      <!-- Create a Form -->
+      <form method="POST">
+          <!-- Security token by Django -->
+          {% csrf_token %}
+  
+          <!-- form as paragraph -->
+          {{ form.as_p }}
+  
+          <input type="submit" value="Update">
+          <a href="{% url 'opportunities-jobs' %}" class="btn btn-danger">Cancel</a>
 
+      </form>
+  </div>
 </div>
-
-
-
-
-
 
 {% endblock content %}
