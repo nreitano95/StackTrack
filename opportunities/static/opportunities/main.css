@@ -73,7 +73,7 @@ a.btn {
 }
 
 .footer {
-  /* background-color: white !important; */
+  background-color: var(--base-nav-footer-bg-color);
   margin-top: auto;
 }
 
