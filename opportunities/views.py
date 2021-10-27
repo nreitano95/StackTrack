@@ -61,7 +61,7 @@ def internships(request):
     return render(request, "opportunities/internships.j2")
 
 
-def user_skills(request):
+def skills(request):
     """Renders a user's skills"""
     context = {"skills": Skills.objects.all()}
-    return render(request, "opportunities/userSkills.j2", context)
+    return render(request, "opportunities/skills.j2", context)
