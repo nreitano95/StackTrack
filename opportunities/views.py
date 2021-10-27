@@ -16,8 +16,9 @@ load_dotenv(find_dotenv())
 
 
 def home(request):
-    """Renders the Home page"""
-
+    """Renders the Home page if not logged in and user's dashboard if logged in"""
+    if request.user.is_authenticated:
+        return render(request, "opportunities/dashboard.j2")
     return render(request, "opportunities/home.j2")
 
 
@@ -42,3 +43,9 @@ def skills(request):
     """Renders a user's skills"""
     context = {"skills": Skills.objects.all()}
     return render(request, "opportunities/skills.j2", context)
+
+
+@login_required
+def dashboard(request):
+    """Renders user's dashboard"""
+    return render(request, "opportunities/dashboard.j2")
