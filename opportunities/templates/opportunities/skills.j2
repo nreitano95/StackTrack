@@ -7,9 +7,56 @@
 {% block content %}
 
     <h1> Skills </h1>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addSkillScreen">
+    New skill
+    </button>
     
-    {% for skill in skills %}
-        {{skill.name}}
-    {% endfor %}
+    <!-- Modal -->
+    <div class="modal fade" id="addSkillScreen" tabindex="-1" role="dialog" aria-labelledby="addSkillScreenLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addSkillScreenLabel">Name your skill</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body add-skill-modal-body">
+                <form method="POST" enctype="multipart/form-data">
+                
+                    <!-- Security token -->
+                    {% csrf_token %}
+                
+                    <!-- Using the formset -->
+                    {{ form.as_p }}
+                    
+                    <input  type="submit" value="Submit">
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Skill name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for skill in skills %}
+                    <tr>
+                        <td>{{ skill.name }}</td>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 
 {% endblock content %}
