@@ -3,6 +3,13 @@ from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
 
 
+class Skills(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self) -> str:
+        return f"{self.name}"
+
+
 class Job(models.Model):
     # each job is related to only one user. If User deleted, cascade delete Job
     author = models.ForeignKey(User, on_delete=CASCADE)
@@ -15,13 +22,9 @@ class Job(models.Model):
     application_date = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 
+    # many-to-many relationship with skills
+    skills = models.ManyToManyField(Skills)
+
     # define method, what to display on print
     def __str__(self) -> str:
         return f"{self.title}|{self.company}"
-
-
-class Skills(models.Model):
-    name = models.CharField(max_length=100)
-
-    def __str__(self) -> str:
-        return f"{self.name}"
