@@ -7,6 +7,7 @@ from django.core.paginator import Paginator
 
 # from .models import <name of model class here>
 from .models import Job, Skills
+from .forms import AddJobForm
 import requests
 import json
 import os
@@ -27,16 +28,53 @@ def about(request):
     return render(request, "opportunities/about.j2", {"title": "About"})
 
 
+@login_required
 def jobs(request):
     """Renders the Jobs page"""
-    context = {"jobs": Job.objects.all()}
+    context = {"jobs": Job.objects.filter(author=request.user).all()}
+
+    # add job form
+    form = AddJobForm(request.POST or None, initial={"author": request.user})
+    if form.is_valid():
+        messages.success(request, "Job Created")
+        form.save()
+    context["form"] = form
+
     return render(request, "opportunities/jobs.j2", context)
 
 
-def internships(request):
-    """Renders the Internships page"""
+@login_required
+def delete_job(request, job_id):
+    """Deletes job entry"""
+    # Delete job from database if matching id is found.
+    try:
+        request.user.job_set.get(id=job_id).delete()
+        messages.success(request, "Job Deleted from Job List")
+    except Job.DoesNotExist:
+        messages.warning(request, "Unable to delete job...")
+    finally:
+        return redirect("opportunities-jobs")
 
-    return render(request, "opportunities/internships.j2")
+
+@login_required
+def update_job(request, job_id):
+    """Updates Job Entry"""
+    context = {"jobs": Job.objects.filter(author=request.user).all()}
+
+    # fetch job object related to passed job_id
+    obj = get_object_or_404(Job, id=job_id)
+
+    # update job form
+    form = AddJobForm(
+        request.POST or None, instance=obj, initial={"author": request.user}
+    )
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Job Updated")
+        return redirect("opportunities-jobs")
+    context["form"] = form
+
+    return render(request, "opportunities/jobs-update.j2", context)
 
 
 def skills(request):

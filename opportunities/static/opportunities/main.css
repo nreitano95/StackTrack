@@ -42,6 +42,10 @@ a:hover {
   color: var(--base-main-accent-hover);
 }
 
+a.btn {
+  color: white;
+}
+
 .site-header .navbar-brand {
   color: rgb(0, 0, 0);
 }
