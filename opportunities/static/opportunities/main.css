@@ -154,6 +154,27 @@ a.btn {
   width: 25%;
 }
 
+
+.google-sign-on-btn {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 30px; 
+}
+.google-sign-on-btn .google-hover {
+  display: none;
+  position: absolute;
+  top:0;
+  left:0;
+  z-index:99;
+  transition: 1s;
+}
+
+.google-sign-on-btn:hover .google-hover {
+  display: inline;
+  transition: 2s;
+  
+}
+
 @media screen and (max-width: 1000px) {
 /* Hide Table Columns on Mobile */
   th:nth-child(2), th:nth-child(3), th:nth-child(4), th:nth-child(5), th:nth-child(6) {
