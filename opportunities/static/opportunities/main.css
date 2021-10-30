@@ -42,10 +42,6 @@ a:hover {
   color: var(--base-main-accent-hover);
 }
 
-a.btn {
-  color: white;
-}
-
 .site-header .navbar-brand {
   color: rgb(0, 0, 0);
 }
@@ -125,6 +121,9 @@ a.btn {
   box-shadow: 0 0 0 0.2rem var(--base-main-accent-box-shadow) !important;
 }
 
+.btn-secondary, .btn-danger {
+  color: white !important;
+}
 
 .content-section {
   background: #ffffff;
