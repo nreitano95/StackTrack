@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 
 # from .models import <name of model class here>
 from .models import Job, Skills
-from .forms import AddJobForm
+from .forms import AddJobForm, AddSkillForm
 import requests
 import json
 import os
@@ -77,9 +77,18 @@ def update_job(request, job_id):
     return render(request, "opportunities/jobs-update.j2", context)
 
 
+@login_required
 def skills(request):
-    """Renders a user's skills"""
+    """Renders all skills"""
     context = {"skills": Skills.objects.all()}
+
+    # add a skill
+    form = AddSkillForm(request.POST or None)
+    if form.is_valid():
+        messages.success(request, "Thanks for contributing to our skills database")
+        form.save()
+    context["form"] = form
+
     return render(request, "opportunities/skills.j2", context)
 
 
