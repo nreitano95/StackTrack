@@ -1,4 +1,5 @@
 {% extends 'opportunities/base.j2' %}
+{% load static %}
 {% load crispy_forms_tags %}
 {% load socialaccount %}
 
@@ -8,13 +9,19 @@
 
 {% block content %}
 
-    <a href="{% provider_login_url 'google' %}">Login with Google</a>
-
     <div class='content-section'>
+        <legend class="border-bottom mb-4">Log In with Google</legend>
+            <div class="google-sign-on-btn">
+                <a href="{% provider_login_url 'google' %}"><img src="{% static 'opportunities/btn_google_signin_light_normal_web.png' %}" style="width:191px;height:46px;"></a>
+                <a href="{% provider_login_url 'google' %}"><img src="{% static 'opportunities/btn_google_signin_dark_normal_web@2x.png' %}" style="width:191px;height:46px;" class="google-hover"></a>
+            </div>
+   
+        <legend>OR</legend><br>
+   
         <form method="POST">
             {% csrf_token %}
             <fieldset class='form-group'>
-                <legend class="border-bottom mb-4">Log In</legend>
+                <legend class="border-bottom mb-4">Log In with Username and Password</legend>
                 {{ form|crispy }}
             </fieldset>
             <div class="form-group">
