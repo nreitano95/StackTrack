@@ -94,6 +94,15 @@ def skills(request):
 
 
 @login_required
+def delete_skill(request, skills_id):
+    """Deletes a skill"""
+    skill = get_object_or_404(Skills, id=skills_id)
+    skill.delete()
+    messages.success(request, "Skill has been removed")
+    return redirect("opportunities-skills")
+
+
+@login_required
 def dashboard(request):
     """Renders user's dashboard"""
     return render(request, "opportunities/dashboard.j2")
