@@ -80,10 +80,13 @@
                             <td>{{ job.description }}</td>
                             <td>{{ job.application_status }}</td>
                             <td>{{job.application_date|date:'Y-m-d'}}</td>
+                            
                             {# Update job #}
                             <td>
                                 <a href="{% url 'opportunities-update-job' job_id=job.id %}" class="btn btn-secondary">Update</a>
                             </td>
+                            <td><a href="{% url 'opportunities-delete-job' job_id=job.id %}" class="btn btn-danger" onclick="confirmationMsg(event)">Delete</a></td>
+
                         </tr>
                         {% endfor %}
 

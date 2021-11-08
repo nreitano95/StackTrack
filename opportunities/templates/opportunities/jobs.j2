@@ -80,7 +80,7 @@
                             </td>
                             <td>
                                 {#  Delete a job #}
-                                <a href="{% url 'opportunities-delete-job' job_id=job.id %}" class="btn btn-danger">Delete</a>
+                                <a href="{% url 'opportunities-delete-job' job_id=job.id %}" class="btn btn-danger" onclick="confirmationMsg(event)">Delete</a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -90,6 +90,5 @@
             </div>
         </div>
     {% endif %}
-
 
 {% endblock content %}

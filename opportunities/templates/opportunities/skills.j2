@@ -54,7 +54,7 @@
                         <td>{{ skill.name }}</td>
                         <td>
                             <!-- Delete a skill -->
-                            <a href="{% url 'opportunities-delete-skill' skills_id=skill.id %}" class="btn btn-danger">Delete</a>
+                            <a href="{% url 'opportunities-delete-skill' skills_id=skill.id %}" class="btn btn-danger" onclick="confirmationMsg(event)">Delete</a>
                         </td>
                     </tr>
                     {% endfor %}
