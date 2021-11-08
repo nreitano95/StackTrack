@@ -1,0 +1,83 @@
+{% extends "opportunities/base.j2" %}
+
+{% block title %}
+    My network
+{% endblock %}
+
+{% block content %}
+
+    <h1> CONTACTS </h1>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addContactModal">
+    New contact
+    </button>
+
+<!-- Modal -->
+    <div class="modal fade" id="addContactModal" tabindex="-1" role="dialog" aria-labelledby="addContactModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addContactModalLabel">Enter Contact Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body add-contact-modal-body">
+                <form method="POST" enctype="multipart/form-data">
+                
+                    <!-- Security token -->
+                    {% csrf_token %}
+                
+                    <!-- Using the formset -->
+                    {{ form.as_p }}
+                    
+                    <input  type="submit" value="Submit">
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    {% if not contacts %}
+        <div class="container">
+            <div class="contacts">
+                <h4>Grow your network by adding contacts</h4>
+            </div> 
+        </div>
+    {% else %}
+
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-12">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Email</th>
+                            <th>Company</th>
+                            <th colspan="2"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for contact in contacts %}
+                        <tr>
+                            <td>{{ contact.firstname }}</td>
+                            <td>{{ contact.lastname }}</td>
+                            <td>{{ contact.email }}</td>
+                            <td>{{ contact.company }}</td>
+
+                            <td>
+                            <!-- Delete a contact -->
+                            <a href="{% url 'opportunities-delete-contact' contacts_id=contact.id %}" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
+
+{% endblock content %}

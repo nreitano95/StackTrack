@@ -18,4 +18,10 @@ urlpatterns = [
         name="opportunities-delete-skill",
     ),
     path("dashboard/", views.dashboard, name="opportunities-dashboard"),
+    path("contacts/", views.contacts, name="opportunities-contacts"),
+    path(
+        "contacts/<int:contacts_id>/delete/",
+        views.delete_contact,
+        name="opportunities-delete-contact",
+    ),
 ]
