@@ -6,29 +6,85 @@
 
 {% block content %}
 
-<div class="jumbotron">
-    <h1 class="display-4">Welcome to StackTrack!</h1>
-    <p class="lead">Easily track your job applications so you can get hired</p>
-    <hr class="my-4">
-        <p>View the jobs you are tracking</p>
-    <a class="btn btn-primary" href="{% url 'opportunities-jobs' %}" role="button">My Jobs</a>
-</div>
+{# Reference: https://getbootstrap.com/docs/4.0/components/modal/ #}
+<!-- Modal -->
+    <div class="modal fade" id="addJobModal" tabindex="-1" role="dialog" aria-labelledby="addJobModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addJobModalLabel">Enter Job Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body add-job-modal-body">
+                <form method="POST" enctype="multipart/form-data">
+                
+                    <!-- Security token -->
+                    {% csrf_token %}
+                
+                    <!-- Using the formset -->
+                    {{ form.as_p }}
+                    
+                    <input  type="submit" value="Submit">
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
 
 <div class="container">
-    <h1 class="display-4">My Dashboard</h1>
+    <h1 class="display-4 text-center">My Dashboard</h1>
+    <div class="card text-center">
+        <div class="card-header">
+            <h3>My Jobs</h3>
+        </div>
         {% if not jobs %}
-        <div class="container">
-            <div class="jobs">
-                <h4>No jobs tracked yet</h4>
-            </div> 
-
+            <div class="card-body">
+                <h5 class="card-title">No applications are currently being tracked.</h5>
+                <p class="card-text">Add a new job to keep track of.</p>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addJobModal">Track a New Job</button>
+            </div>
         </div>
     {% else %}
 
-        <div class="row justify-content-center mt-5">
+    <div class="card-deck">
+        <div class="card">
+            <div class="card-body">
+            <h5 class="card-title">Jobs Currently Tracked</h5>
+            <h1 class="card-text">{{ jobs | length }}</h1>
+            </div>
+            <div class="card-footer">
+            <small class="text-muted"></small>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+            <h5 class="card-title">Pending Applications</h5>
+            <h1 class="card-text">{{ pending_apps | length}}</h1>
+
+            </div>
+            <div class="card-footer">
+            <small class="text-muted"></small>
+            </div>
+        </div>
+            <div class="card">
+            <div class="card-body">
+            <h5 class="card-title">Submitted Applications</h5>
+            <h1 class="card-text">{{ submitted_apps | length}}</h1>
+            </div>
+            <div class="card-footer">
+            <small class="text-muted"></small>
+            </div>
+        </div>
+    </div>
+            <div class="card-body">
+                <a href="{% url 'opportunities-jobs' %}" class="btn btn-primary" data-target="#addJobModal" data-toggle="addJobModal">Track New Job</a>
+            </div>
+            <div class="row mt-5">
             <div class="col-md-12">
                 <table class="table table-hover">
-                    <thead>
+                    <thead class="thead">
                         <tr>
                             <th>Company</th>
                             <th>Title</th>
@@ -38,6 +94,7 @@
                             <th>Application Status</th>
                             <th>Application Date</th>
                             <th colspan="2"></th>
+                        </tr>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,14 +107,13 @@
                             <td>{{ job.description }}</td>
                             <td>{{ job.application_status }}</td>
                             <td>{{job.application_date|date:'Y-m-d'}}</td>
+                            
                             {# Update job #}
                             <td>
                                 <a href="{% url 'opportunities-update-job' job_id=job.id %}" class="btn btn-secondary">Update</a>
                             </td>
-                            <td>
-                                {#  Delete a job #}
-                                <a href="{% url 'opportunities-delete-job' job_id=job.id %}" class="btn btn-danger">Delete</a>
-                            </td>
+                            <td><a href="{% url 'opportunities-delete-job' job_id=job.id %}" class="btn btn-danger" onclick="confirmationMsg(event)">Delete</a></td>
+
                         </tr>
                         {% endfor %}
 
@@ -65,16 +121,12 @@
                 </table>
             </div>
         </div>
+        </div>
 
-        
+
     {% endif %}
 
 
 </div>
-
-
-
-
-
 
 {% endblock content %}

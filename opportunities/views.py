@@ -19,8 +19,24 @@ load_dotenv(find_dotenv())
 def home(request):
     """Renders the Home page if not logged in and user's dashboard if logged in"""
     if request.user.is_authenticated:
-        jobs = {"jobs": Job.objects.filter(author=request.user).all()}
-        return render(request, "opportunities/dashboard.j2", jobs)
+        jobs = Job.objects.filter(author=request.user).all()
+        context = {
+            "jobs": jobs, 
+            "skills": Skills.objects.all(), 
+            "pending_apps": jobs.filter(application_status="Pending"),
+            "submitted_apps": jobs.filter(application_status="Submitted"),
+            }
+
+        # add job form
+        form = AddJobForm(request.POST or None, initial={"author": request.user})
+        if form.is_valid():
+            messages.success(request, "Job Created")
+            form.save()
+            return redirect("opportunities-home")
+
+        context["form"] = form
+
+        return render(request, "opportunities/dashboard.j2", context)
     return render(request, "opportunities/home.j2")
 
 
@@ -39,6 +55,8 @@ def jobs(request):
     if form.is_valid():
         messages.success(request, "Job Created")
         form.save()
+        return redirect("opportunities-jobs")
+
     context["form"] = form
 
     return render(request, "opportunities/jobs.j2", context)

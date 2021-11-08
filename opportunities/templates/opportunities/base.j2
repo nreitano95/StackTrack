@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="{% static 'opportunities/main.css' %}"/>
-    <link rel="shortcut icon" type="image" href="{% static 'opportunities/favicon.ico' %}"/>
+    <link rel="shortcut icon" type="image" href="{% static 'opportunities/favicon/favicon.ico' %}"/>
 
     <title>StackTrack | {% block title %}Opportunities{% endblock %}</title>
 
@@ -71,13 +71,20 @@
             <div class="row mt-3">
               <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                 <h6 class="text-uppercase fw-bold mb-4">StackTrack</h6>
-                <p>Easily track your job applications so you can get hired.</p>
+                <p>Easily track your job applications so you can land your dream job.</p>
               </div>
 
               <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                 <h6 class="text-uppercase fw-bold mb-4">Useful links</h6>
                 <p><a href="{% url 'opportunities-home' %}" class="text-reset">Home</a></p>
                 <p><a href="{% url 'opportunities-about' %}" class="text-reset">About</a></p>
+                {% if not user.is_authenticated %}
+                <p><a href="{% url 'register' %}" class="text-reset">Sign Up</a></p>
+                {% else %}
+                <p><a href="{% url 'opportunities-jobs' %}" class="text-reset">My Jobs</a></p>
+                <p><a href="{% url 'profile' %}" class="text-reset">My Profile</a></p>
+
+                {% endif %}
               </div>
 
               <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
@@ -99,6 +106,13 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      function confirmationMsg(e) {
+        if(!confirm('Are you sure you would like to make these changes?')) {
+          e.preventDefault();
+          }
+        }
+    </script>
 
 </body>
 </html>

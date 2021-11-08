@@ -153,7 +153,6 @@ a:hover {
   width: 25%;
 }
 
-
 .google-sign-on-btn {
   position: relative;
   display: inline-block;
@@ -172,6 +171,10 @@ a:hover {
   display: inline;
   transition: 2s;
   
+}
+
+.card, .card-deck {
+  margin: 20px;
 }
 
 @media screen and (max-width: 1000px) {
