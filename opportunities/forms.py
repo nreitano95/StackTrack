@@ -37,27 +37,27 @@ class AddJobForm(ModelForm):
             'company': TextInput(attrs={
                 'class': "form-control",
                 'style': 'max-width: 300px;',
-                'placeholder': 'Name'
+                'placeholder': 'Company'
                 }),
             'employment_type': TextInput(attrs={
                 'class': "form-control",
                 'style': 'max-width: 300px;',
-                'placeholder': 'Name'
+                'placeholder': 'Employment Type'
                 }),
             'salary': TextInput(attrs={
                 'class': "form-control",
                 'style': 'max-width: 300px;',
-                'placeholder': 'Name'
+                'placeholder': 'Salary'
                 }),
             'description': TextInput(attrs={
                 'class': "form-control",
                 'style': 'max-width: 300px;',
-                'placeholder': 'Name'
+                'placeholder': 'Description'
                 }),
             'application_status': TextInput(attrs={
                 'class': "form-control",
                 'style': 'max-width: 300px;',
-                'placeholder': 'Name'
+                'placeholder': 'Enter the Status'
                 })                                                                                                  
         }
 
