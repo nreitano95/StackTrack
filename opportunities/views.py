@@ -19,7 +19,13 @@ load_dotenv(find_dotenv())
 def home(request):
     """Renders the Home page if not logged in and user's dashboard if logged in"""
     if request.user.is_authenticated:
-        context = {"jobs": Job.objects.filter(author=request.user).all(), "skills": Skills.objects.all()}
+        jobs = Job.objects.filter(author=request.user).all()
+        context = {
+            "jobs": jobs, 
+            "skills": Skills.objects.all(), 
+            "pending_apps": jobs.filter(application_status="Pending"),
+            "submitted_apps": jobs.filter(application_status="Submitted"),
+            }
         return render(request, "opportunities/dashboard.j2", context)
     return render(request, "opportunities/home.j2")
 
