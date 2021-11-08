@@ -71,13 +71,20 @@
             <div class="row mt-3">
               <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                 <h6 class="text-uppercase fw-bold mb-4">StackTrack</h6>
-                <p>Easily track your job applications so you can get hired.</p>
+                <p>Easily track your job applications so you can land your dream job.</p>
               </div>
 
               <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                 <h6 class="text-uppercase fw-bold mb-4">Useful links</h6>
                 <p><a href="{% url 'opportunities-home' %}" class="text-reset">Home</a></p>
                 <p><a href="{% url 'opportunities-about' %}" class="text-reset">About</a></p>
+                {% if not user.is_authenticated %}
+                <p><a href="{% url 'register' %}" class="text-reset">Sign Up</a></p>
+                {% else %}
+                <p><a href="{% url 'opportunities-jobs' %}" class="text-reset">My Jobs</a></p>
+                <p><a href="{% url 'profile' %}" class="text-reset">My Profile</a></p>
+
+                {% endif %}
               </div>
 
               <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
