@@ -58,7 +58,7 @@ class AddJobForm(ModelForm):
                 'class': "form-control",
                 'style': 'max-width: 300px;',
                 'placeholder': 'Name'
-                })                                                                                                  
+                }),                                                                                                  
         }
 
 
