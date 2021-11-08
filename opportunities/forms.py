@@ -23,44 +23,6 @@ class AddJobForm(ModelForm):
             "application_status",
         ]
 
-        widgets = {
-            'author': TextInput(attrs={
-                'class': "form-control",
-                'style': 'max-width: 300px;',
-                'placeholder': 'Name'
-                }),
-            'title': TextInput(attrs={
-                'class': "form-control",
-                'style': 'max-width: 300px;',
-                'placeholder': 'Job Title'
-                }),
-            'company': TextInput(attrs={
-                'class': "form-control",
-                'style': 'max-width: 300px;',
-                'placeholder': 'Company'
-                }),
-            'employment_type': TextInput(attrs={
-                'class': "form-control",
-                'style': 'max-width: 300px;',
-                'placeholder': 'Employment Type'
-                }),
-            'salary': TextInput(attrs={
-                'class': "form-control",
-                'style': 'max-width: 300px;',
-                'placeholder': 'Salary'
-                }),
-            'description': TextInput(attrs={
-                'class': "form-control",
-                'style': 'max-width: 300px;',
-                'placeholder': 'Description'
-                }),
-            'application_status': TextInput(attrs={
-                'class': "form-control",
-                'style': 'max-width: 300px;',
-                'placeholder': 'Enter the Status'
-                }),                                                                                                  
-        }
-
 
 class AddSkillForm(forms.ModelForm):
     class Meta:
