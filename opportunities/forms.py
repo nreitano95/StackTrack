@@ -1,10 +1,11 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.forms import TextInput, ModelForm
 from .models import Job, Skills
 
 
 # creating a form
-class AddJobForm(forms.ModelForm):
+class AddJobForm(ModelForm):
 
     # create meta class
     class Meta:
@@ -21,6 +22,44 @@ class AddJobForm(forms.ModelForm):
             "description",
             "application_status",
         ]
+
+        widgets = {
+            'author': TextInput(attrs={
+                'class': "form-control",
+                'style': 'max-width: 300px;',
+                'placeholder': 'Name'
+                }),
+            'title': TextInput(attrs={
+                'class': "form-control",
+                'style': 'max-width: 300px;',
+                'placeholder': 'Job Title'
+                }),
+            'company': TextInput(attrs={
+                'class': "form-control",
+                'style': 'max-width: 300px;',
+                'placeholder': 'Name'
+                }),
+            'employment_type': TextInput(attrs={
+                'class': "form-control",
+                'style': 'max-width: 300px;',
+                'placeholder': 'Name'
+                }),
+            'salary': TextInput(attrs={
+                'class': "form-control",
+                'style': 'max-width: 300px;',
+                'placeholder': 'Name'
+                }),
+            'description': TextInput(attrs={
+                'class': "form-control",
+                'style': 'max-width: 300px;',
+                'placeholder': 'Name'
+                }),
+            'application_status': TextInput(attrs={
+                'class': "form-control",
+                'style': 'max-width: 300px;',
+                'placeholder': 'Name'
+                }),                                                                                                  
+        }
 
 
 class AddSkillForm(forms.ModelForm):
