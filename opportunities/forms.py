@@ -1,10 +1,11 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.forms import TextInput, ModelForm
 from .models import Job, Skills, Contacts
 
 
 # creating a form
-class AddJobForm(forms.ModelForm):
+class AddJobForm(ModelForm):
 
     # create meta class
     class Meta:

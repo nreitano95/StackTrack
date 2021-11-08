@@ -1,4 +1,5 @@
 {% extends "opportunities/base.j2" %}
+{% load crispy_forms_tags %}
 
 {% block title %}
     My Skills
@@ -29,8 +30,8 @@
                     <!-- Security token -->
                     {% csrf_token %}
                 
-                    <!-- Using the formset -->
-                    {{ form.as_p }}
+                    <!-- Crispy Form -->
+                    {{ form | crispy }}
                     
                     <input  type="submit" value="Submit">
                 </form>
