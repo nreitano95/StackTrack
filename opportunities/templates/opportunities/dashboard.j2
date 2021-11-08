@@ -1,4 +1,5 @@
 {% extends "opportunities/base.j2" %}
+{% load crispy_forms_tags %}
 
 {% block title %}
     Dashboard
@@ -79,7 +80,7 @@
         </div>
     </div>
             <div class="card-body">
-                <a href="{% url 'opportunities-jobs' %}" class="btn btn-primary" data-target="#addJobModal" data-toggle="addJobModal">Track New Job</a>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addJobModal">Track a New Job</button>
             </div>
             <div class="row mt-5">
             <div class="col-md-12">
