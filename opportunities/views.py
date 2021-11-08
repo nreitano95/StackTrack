@@ -6,8 +6,8 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 
 # from .models import <name of model class here>
-from .models import Job, Skills
-from .forms import AddJobForm, AddSkillForm
+from .models import Job, Skills, Contacts
+from .forms import AddJobForm, AddSkillForm, AddContactForm
 import requests
 import json
 import os
@@ -124,3 +124,48 @@ def delete_skill(request, skills_id):
 def dashboard(request):
     """Renders user's dashboard"""
     return render(request, "opportunities/dashboard.j2")
+
+
+@login_required
+def contacts(request):
+    """Renders all skills"""
+    context = {"contacts": Contacts.objects.filter(user=request.user).all()}
+
+    # create new contact
+    form = AddContactForm(request.POST or None, initial={"user": request.user})
+    if form.is_valid():
+        messages.success(request, "Successfully grew your network")
+        form.save()
+    context["form"] = form
+
+    return render(request, "opportunities/contacts.j2", context)
+
+
+@login_required
+def update_contact(request, contacts_id):
+    """Updates Job Entry"""
+    context = {"contacts": Contacts.objects.filter(user=request.user).all()}
+
+    # get details for contact being updated
+    obj = get_object_or_404(Contacts, id=contacts_id)
+
+    # update contact form
+    form = AddContactForm(
+        request.POST or None, instance=obj, initial={"user": request.user}
+    )
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Contact updated")
+        return redirect("opportunities-contacts")
+    context["form"] = form
+
+    return render(request, "opportunities/update-contact.j2", context)
+
+
+@login_required
+def delete_contact(request, contacts_id):
+    """Deletes a skill"""
+    contact = get_object_or_404(Contacts, id=contacts_id)
+    contact.delete()
+    messages.success(request, "Contact removed from your network")
+    return redirect("opportunities-contacts")

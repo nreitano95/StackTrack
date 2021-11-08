@@ -1,7 +1,11 @@
 from django import forms
 from django.contrib.auth.models import User
+<<<<<<< HEAD
 from django.forms import TextInput, ModelForm
 from .models import Job, Skills
+=======
+from .models import Job, Skills, Contacts
+>>>>>>> master
 
 
 # creating a form
@@ -66,4 +70,21 @@ class AddSkillForm(forms.ModelForm):
     class Meta:
         model = Skills
 
+<<<<<<< HEAD
         fields = ["name"]
+=======
+        fields = ["name"]
+
+
+class AddContactForm(forms.ModelForm):
+    class Meta:
+        model = Contacts
+
+        fields = [
+            "user",
+            "firstname",
+            "lastname",
+            "companyname",
+            "email",
+        ]
+>>>>>>> master
