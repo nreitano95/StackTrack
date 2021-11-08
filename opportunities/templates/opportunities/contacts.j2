@@ -48,7 +48,7 @@
     {% else %}
 
         <div class="row justify-content-center mt-5">
-            <div class="col-md-12">
+            <div class="col-md-10">
                 <table class="table table-hover">
                     <thead class="thead-dark">
                         <tr>
@@ -72,7 +72,7 @@
                             </td>
                             <td>
                             <!-- Delete a contact -->
-                            <a href="{% url 'opportunities-delete-contact' contacts_id=contact.id %}" class="btn btn-danger">Delete</a>
+                            <a href="{% url 'opportunities-delete-contact' contacts_id=contact.id %}" class="btn btn-danger" onclick="confirmationMsg(event)">Delete</a>
                             </td>
                         </tr>
                         {% endfor %}
