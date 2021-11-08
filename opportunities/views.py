@@ -32,8 +32,10 @@ def home(request):
         if form.is_valid():
             messages.success(request, "Job Created")
             form.save()
+            return redirect("opportunities-home")
+
         context["form"] = form
-                    
+
         return render(request, "opportunities/dashboard.j2", context)
     return render(request, "opportunities/home.j2")
 
@@ -53,6 +55,8 @@ def jobs(request):
     if form.is_valid():
         messages.success(request, "Job Created")
         form.save()
+        return redirect("opportunities-jobs")
+
     context["form"] = form
 
     return render(request, "opportunities/jobs.j2", context)
