@@ -1,0 +1,26 @@
+{% extends "opportunities/base.j2" %}
+
+{% block title %}
+Update Contact
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="main">
+        <!-- Create a Form -->
+        <form method="POST">
+            <!-- Security token by Django -->
+            {% csrf_token %}
+
+            <!-- form as paragraph -->
+            {{ form.as_p }}
+
+            <input type="submit" value="Update">
+            <a href="{% url 'opportunities-contacts' %}" class="btn btn-danger">Cancel</a>
+
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
