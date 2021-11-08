@@ -26,6 +26,14 @@ def home(request):
             "pending_apps": jobs.filter(application_status="Pending"),
             "submitted_apps": jobs.filter(application_status="Submitted"),
             }
+
+        # add job form
+        form = AddJobForm(request.POST or None, initial={"author": request.user})
+        if form.is_valid():
+            messages.success(request, "Job Created")
+            form.save()
+        context["form"] = form
+                    
         return render(request, "opportunities/dashboard.j2", context)
     return render(request, "opportunities/home.j2")
 
