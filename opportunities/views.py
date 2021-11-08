@@ -124,6 +124,27 @@ def contacts(request):
 
 
 @login_required
+def update_contact(request, contacts_id):
+    """Updates Job Entry"""
+    context = {"contacts": Contacts.objects.filter(user=request.user).all()}
+
+    # get details for contact being updated
+    obj = get_object_or_404(Contacts, id=contacts_id)
+
+    # update contact form
+    form = AddContactForm(
+        request.POST or None, instance=obj, initial={"user": request.user}
+    )
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Contact updated")
+        return redirect("opportunities-contacts")
+    context["form"] = form
+
+    return render(request, "opportunities/update-contact.j2", context)
+
+
+@login_required
 def delete_contact(request, contacts_id):
     """Deletes a skill"""
     contact = get_object_or_404(Contacts, id=contacts_id)

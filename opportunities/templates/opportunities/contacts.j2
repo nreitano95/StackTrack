@@ -65,8 +65,11 @@
                             <td>{{ contact.firstname }}</td>
                             <td>{{ contact.lastname }}</td>
                             <td>{{ contact.email }}</td>
-                            <td>{{ contact.company }}</td>
-
+                            <td>{{ contact.companyname }}</td>
+                            <td>
+                            <!-- Update a contact -->
+                            <a href="{% url 'opportunities-update-contact' contacts_id=contact.id %}" class="btn btn-secondary">Update</a>
+                            </td>
                             <td>
                             <!-- Delete a contact -->
                             <a href="{% url 'opportunities-delete-contact' contacts_id=contact.id %}" class="btn btn-danger">Delete</a>

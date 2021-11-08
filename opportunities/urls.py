@@ -20,6 +20,11 @@ urlpatterns = [
     path("dashboard/", views.dashboard, name="opportunities-dashboard"),
     path("contacts/", views.contacts, name="opportunities-contacts"),
     path(
+        "contacts/<str:contacts_id>/update/",
+        views.update_contact,
+        name="opportunities-update-contact",
+    ),
+    path(
         "contacts/<int:contacts_id>/delete/",
         views.delete_contact,
         name="opportunities-delete-contact",
