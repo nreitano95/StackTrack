@@ -60,6 +60,7 @@
                             <th>Employment Type</th>
                             <th>Salary</th>
                             <th>Description</th>
+                            <th>Skills</th>
                             <th>Application Status</th>
                             <th>Application Date</th>
                             <th colspan="2"></th>
@@ -73,6 +74,11 @@
                             <td>{{ job.employment_type }}</td>
                             <td>{{ job.salary }}</td>
                             <td>{{ job.description }}</td>
+                            <td>
+                                {% for skill in job.skills.all %}
+                                    {{skill}}
+                                {% endfor %}
+                            </td>
                             <td>{{ job.application_status }}</td>
                             <td>{{job.application_date|date:'Y-m-d'}}</td>
                             {# Update job #}

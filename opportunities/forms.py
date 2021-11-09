@@ -21,6 +21,7 @@ class AddJobForm(ModelForm):
             "salary",
             "description",
             "application_status",
+            "skills"
         ]
 
 

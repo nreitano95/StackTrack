@@ -48,7 +48,10 @@ def about(request):
 @login_required
 def jobs(request):
     """Renders the Jobs page"""
-    context = {"jobs": Job.objects.filter(author=request.user).all()}
+    job = Job.objects.filter(author=request.user).all()
+    context = {
+        "jobs": job
+    }
 
     # add job form
     form = AddJobForm(request.POST or None, initial={"author": request.user})
