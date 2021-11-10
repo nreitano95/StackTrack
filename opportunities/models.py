@@ -2,6 +2,20 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
 
+# Constants
+EMPLOYMENT_CHOICES = (
+    ("Full-Time", "Full-Time"),
+    ("Part-Time", "Part-Time"),
+    ("Internship", "Internship"),
+)
+
+APPLICATION_STATUS_CHOICES = (
+    ("Applied", "Applied"),
+    ("Interviewing", "Interviewing"),
+    ("Rejected", "Rejected"),
+    ("Received Offer", "Received Offer"),
+)
+
 
 class Skills(models.Model):
     name = models.CharField(max_length=100)
@@ -15,10 +29,10 @@ class Job(models.Model):
     author = models.ForeignKey(User, on_delete=CASCADE)
     company = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
-    employment_type = models.CharField(max_length=255)
+    employment_type = models.CharField(max_length=255, choices=EMPLOYMENT_CHOICES)
     salary = models.IntegerField(default=0)
     description = models.TextField()
-    application_status = models.CharField(max_length=128)
+    application_status = models.CharField(max_length=128, choices=APPLICATION_STATUS_CHOICES)
     application_date = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 
