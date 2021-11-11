@@ -11,7 +11,6 @@ class AddJobForm(ModelForm):
     class Meta:
         # specify model to be used
         model = Job
-
         # specify fields to be used
         fields = [
             "author",
@@ -21,7 +20,14 @@ class AddJobForm(ModelForm):
             "salary",
             "description",
             "application_status",
+            "skills"
         ]
+        # widgets
+        widgets = {"author": forms.HiddenInput()}
+    skills = forms.ModelMultipleChoiceField(
+        queryset=Skills.objects.all(),
+        widget=forms.CheckboxSelectMultiple
+    )
 
 
 class AddSkillForm(forms.ModelForm):
