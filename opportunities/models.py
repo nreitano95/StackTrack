@@ -38,7 +38,7 @@ class Job(models.Model):
     last_modified = models.DateTimeField(auto_now=True)
 
     # many-to-many relationship with skills
-    skills = models.ManyToManyField(Skills, blank=True)
+    skills = models.ManyToManyField(Skills, blank=False)
 
     # define method, what to display on print
     def __str__(self) -> str:

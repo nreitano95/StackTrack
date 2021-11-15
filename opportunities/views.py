@@ -33,7 +33,7 @@ def home(request):
             messages.success(request, "Job Created")
             form.save()
             return redirect("opportunities-home")
-
+    
         context["form"] = form
 
         return render(request, "opportunities/dashboard.j2", context)
