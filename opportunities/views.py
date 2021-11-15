@@ -36,7 +36,10 @@ def home(request):
 
         context["form"] = form
 
+        # add skill on job form
         
+
+        context["form"] = form
 
         return render(request, "opportunities/dashboard.j2", context)
     return render(request, "opportunities/home.j2")
@@ -110,6 +113,8 @@ def skills(request):
     if form.is_valid():
         messages.success(request, "Thanks for contributing to our skills database")
         form.save()
+        return redirect("opportunities-skills")
+        
     context["form"] = form
 
     return render(request, "opportunities/skills.j2", context)
