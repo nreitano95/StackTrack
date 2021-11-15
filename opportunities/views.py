@@ -23,7 +23,7 @@ def home(request):
         context = {
             "jobs": jobs, 
             "skills": Skills.objects.all(), 
-            "pending_apps": jobs.filter(application_status="Pending"),
+            "pending_apps": jobs.filter(application_status="Not Yet Applied"),
             "submitted_apps": jobs.filter(application_status="Applied"),
             }
 
@@ -33,7 +33,7 @@ def home(request):
             messages.success(request, "Job Created")
             form.save()
             return redirect("opportunities-home")
-
+    
         context["form"] = form
 
         return render(request, "opportunities/dashboard.j2", context)
@@ -108,6 +108,8 @@ def skills(request):
     if form.is_valid():
         messages.success(request, "Thanks for contributing to our skills database")
         form.save()
+        return redirect("opportunities-skills")
+
     context["form"] = form
 
     return render(request, "opportunities/skills.j2", context)

@@ -25,7 +25,8 @@ class AddJobForm(ModelForm):
         # widgets
         widgets = {"author": forms.HiddenInput()}
     skills = forms.ModelMultipleChoiceField(
-        queryset=Skills.objects.all(),
+        required=False,
+        queryset=Skills.objects.all().order_by('name'),
         widget=forms.CheckboxSelectMultiple
     )
 
