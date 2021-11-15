@@ -24,7 +24,7 @@ def home(request):
             "jobs": jobs, 
             "skills": Skills.objects.all(), 
             "pending_apps": jobs.filter(application_status="Pending"),
-            "submitted_apps": jobs.filter(application_status="Submitted"),
+            "submitted_apps": jobs.filter(application_status="Applied"),
             }
 
         # add job form
@@ -101,7 +101,7 @@ def update_job(request, job_id):
 @login_required
 def skills(request):
     """Renders all skills"""
-    context = {"skills": Skills.objects.all()}
+    context = {"skills": Skills.objects.all().order_by('name')}
 
     # add a skill
     form = AddSkillForm(request.POST or None)
@@ -131,7 +131,7 @@ def dashboard(request):
 @login_required
 def contacts(request):
     """Renders all skills"""
-    context = {"contacts": Contacts.objects.filter(user=request.user).all()}
+    context = {"contacts": Contacts.objects.filter(user=request.user).all().order_by('company_name')}
 
     # create new contact
     form = AddContactForm(request.POST or None, initial={"user": request.user})

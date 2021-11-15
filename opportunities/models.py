@@ -10,6 +10,7 @@ EMPLOYMENT_CHOICES = (
 )
 
 APPLICATION_STATUS_CHOICES = (
+    ("Not Yet Applied", "Not Yet Applied"),
     ("Applied", "Applied"),
     ("Interviewing", "Interviewing"),
     ("Rejected", "Rejected"),
@@ -31,13 +32,13 @@ class Job(models.Model):
     title = models.CharField(max_length=255)
     employment_type = models.CharField(max_length=255, choices=EMPLOYMENT_CHOICES)
     salary = models.IntegerField(default=0)
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
     application_status = models.CharField(max_length=128, choices=APPLICATION_STATUS_CHOICES)
     application_date = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 
     # many-to-many relationship with skills
-    skills = models.ManyToManyField(Skills)
+    skills = models.ManyToManyField(Skills, blank=True)
 
     # define method, what to display on print
     def __str__(self) -> str:
@@ -50,7 +51,7 @@ class Contacts(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     company_name = models.CharField(max_length=255)
-    email = models.CharField(max_length=255)
+    email = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self) -> str:
         return f"{self.first_name}|{self.last_name}"
