@@ -23,7 +23,7 @@ def home(request):
         context = {
             "jobs": jobs, 
             "skills": Skills.objects.all(), 
-            "pending_apps": jobs.filter(application_status="Pending"),
+            "pending_apps": jobs.filter(application_status="Not Yet Applied"),
             "submitted_apps": jobs.filter(application_status="Applied"),
             }
 
@@ -35,6 +35,8 @@ def home(request):
             return redirect("opportunities-home")
 
         context["form"] = form
+
+        
 
         return render(request, "opportunities/dashboard.j2", context)
     return render(request, "opportunities/home.j2")
