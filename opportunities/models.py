@@ -47,10 +47,10 @@ class Job(models.Model):
 class Contacts(models.Model):
     # all contacts are related to a user
     user = models.ForeignKey(User, on_delete=CASCADE)
-    firstname = models.CharField(max_length=255)
-    lastname = models.CharField(max_length=255)
-    companyname = models.CharField(max_length=255)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    company_name = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
 
     def __str__(self) -> str:
-        return f"{self.firstname}|{self.lastname}"
+        return f"{self.first_name}|{self.last_name}"

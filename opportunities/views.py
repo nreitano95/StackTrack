@@ -19,7 +19,7 @@ load_dotenv(find_dotenv())
 def home(request):
     """Renders the Home page if not logged in and user's dashboard if logged in"""
     if request.user.is_authenticated:
-        jobs = Job.objects.filter(author=request.user).all()
+        jobs = Job.objects.filter(author=request.user).all().order_by('company')
         context = {
             "jobs": jobs, 
             "skills": Skills.objects.all(), 
@@ -49,7 +49,7 @@ def about(request):
 def jobs(request):
     """Renders the Jobs page"""
     context = {
-        "jobs": Job.objects.filter(author=request.user).all()
+        "jobs": Job.objects.filter(author=request.user).all().order_by('company')
     }
 
     # add job form
@@ -136,7 +136,7 @@ def contacts(request):
     # create new contact
     form = AddContactForm(request.POST or None, initial={"user": request.user})
     if form.is_valid():
-        messages.success(request, "Successfully grew your network")
+        messages.success(request, "Successfully grew your network!")
         form.save()
     context["form"] = form
 
