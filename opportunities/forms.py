@@ -1,12 +1,13 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.forms import TextInput, ModelForm
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit, Layout, Field
 from .models import Job, Skills, Contacts
 
 
 # creating a form
 class AddJobForm(ModelForm):
-
     # create meta class
     class Meta:
         # specify model to be used
@@ -29,6 +30,7 @@ class AddJobForm(ModelForm):
         queryset=Skills.objects.all().order_by('name'),
         widget=forms.CheckboxSelectMultiple
     )
+
 
 
 class AddSkillForm(forms.ModelForm):

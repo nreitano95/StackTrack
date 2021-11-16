@@ -84,18 +84,18 @@
             </div>
             <div class="row mt-5">
             <div class="col-md-12">
-                <table class="table table-hover" id="sortTable">
-                    <thead class="thead">
+                <table class="table table-hover table-responsive" id="sortTable">
+                    <thead class="thead-dark">
                         <tr>
                             <th onclick="sortTable(0)">Company</th>
                             <th onclick="sortTable(1)">Title</th>
-                            <th onclick="sortTable(2)">Employment Type</th>
-                            <th onclick="sortTable(3)">Salary</th>
-                            <th onclick="sortTable(4)">Description</th>
-                            <th onclick="sortTable(5)">Application Status</th>
-                            <th onclick="sortTable(6)">Application Date</th>
-                            <th colspan="2"></th>
-                        </tr>
+                            <th class="d-none d-lg-table-cell" onclick="sortTable(2)">Employment Type</th>
+                            <th class="d-none d-lg-table-cell" onclick="sortTable(3)">Salary</th>
+                            <th class="d-none d-lg-table-cell" onclick="sortTable(4)">Description</th>
+                            <th class="d-none d-lg-table-cell" onclick="sortTable(5)">Skills</th>
+                            <th class="d-none d-md-table-cell" onclick="sortTable(6)">Application Status</th>
+                            <th class="d-none d-md-table-cell" onclick="sortTable(7)">Application Date</th>
+                            <th colspan="1"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -103,18 +103,23 @@
                         <tr>
                             <td>{{ job.company }}</td>
                             <td>{{ job.title }}</td>
-                            <td>{{ job.employment_type }}</td>
-                            <td>{{ job.salary }}</td>
-                            <td>{{ job.description }}</td>
-                            <td>{{ job.application_status }}</td>
-                            <td>{{job.application_date|date:'Y-m-d'}}</td>
-                            
+                            <td class="d-none d-lg-table-cell" >{{ job.employment_type }}</td>
+                            <td class="d-none d-lg-table-cell" >{{ job.salary }}</td>
+                            <td class="d-none d-lg-table-cell" >{{ job.description }}</td>
+                            <td class="d-none d-lg-table-cell" >
+                                {% for skill in job.skills.all %}
+                                    {{skill}}
+                                {% endfor %}
+                            </td>
+                            <td class="d-none d-md-table-cell">{{ job.application_status }}</td>
+                            <td class="d-none d-md-table-cell" >{{job.application_date|date:'Y-m-d'}}</td>
                             {# Update job #}
                             <td>
-                                <a href="{% url 'opportunities-update-job' job_id=job.id %}" class="btn btn-secondary">Update</a>
-                            </td>
-                            <td><a href="{% url 'opportunities-delete-job' job_id=job.id %}" class="btn btn-danger" onclick="confirmationMsg(event)">Delete</a></td>
+                                <a href="{% url 'opportunities-update-job' job_id=job.id %}" class="btn btn-secondary btn-block">Update</a>
 
+                                {#  Delete a job #}
+                                <a href="{% url 'opportunities-delete-job' job_id=job.id %}" class="btn btn-danger btn-block" onclick="confirmationMsg(event)">Delete</a>
+                            </td>
                         </tr>
                         {% endfor %}
 
