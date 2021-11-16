@@ -175,19 +175,16 @@ a:hover {
 }
 
 @media screen and (max-width: 1000px) {
-  /* Hide Table Columns on Mobile */
-  /* Hide middle columns */
-  /* th:not(th:nth-child(-n+3), th:nth-last-child(-n+1)) {
-    display: none;
-  }
-  td:not(td:nth-child(-n+3), td:nth-last-child(-n+2)) {
-    display: none;
-  } */
   #category, #city {
     width: 60%;
   }
   .footer {
     margin-top: 25px;
   }
-
+  .table th {
+    padding: .1em;
+  }
+  .table td {
+    padding: .1em;
+  }
 }
