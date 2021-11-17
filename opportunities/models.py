@@ -19,6 +19,8 @@ APPLICATION_STATUS_CHOICES = (
 
 
 class Skills(models.Model):
+    # Each user manages their own set of skills
+    user = models.ForeignKey(User, on_delete=CASCADE)
     name = models.CharField(max_length=100)
 
     def __str__(self) -> str:
@@ -33,7 +35,9 @@ class Job(models.Model):
     employment_type = models.CharField(max_length=255, choices=EMPLOYMENT_CHOICES)
     salary = models.IntegerField(default=0)
     description = models.TextField(blank=True, null=True)
-    application_status = models.CharField(max_length=128, choices=APPLICATION_STATUS_CHOICES)
+    application_status = models.CharField(
+        max_length=128, choices=APPLICATION_STATUS_CHOICES
+    )
     application_date = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 
