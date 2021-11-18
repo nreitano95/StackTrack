@@ -39,6 +39,14 @@
         </div>
     </div>
 
+    {% if not skills %}
+    <div class="container">
+            <div class="skills">
+                <h4>Understand if you're a good fit for a job by expanding your skillset</h4>
+            </div> 
+        </div>
+
+    {% else %}
     <div class="row justify-content-center mt-5">
         <div class="col-md-6">
             <table class="table table-hover">
@@ -58,7 +66,7 @@
                         </td>
                     </tr>
                     {% endfor %}
-
+        {% endif %}
 
                 </tbody>
             </table>

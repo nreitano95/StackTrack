@@ -21,23 +21,26 @@ class AddJobForm(ModelForm):
             "salary",
             "description",
             "application_status",
-            "skills"
+            "skills",
         ]
         # widgets
         widgets = {"author": forms.HiddenInput()}
+
     skills = forms.ModelMultipleChoiceField(
         required=False,
-        queryset=Skills.objects.all().order_by('name'),
-        widget=forms.CheckboxSelectMultiple
+        queryset=Skills.objects.all().order_by("name"),
+        widget=forms.CheckboxSelectMultiple,
     )
-
 
 
 class AddSkillForm(forms.ModelForm):
     class Meta:
         model = Skills
 
-        fields = ["name"]
+        fields = [
+            "user",
+            "name",
+        ]
 
 
 class AddContactForm(forms.ModelForm):

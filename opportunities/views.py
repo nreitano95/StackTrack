@@ -19,13 +19,13 @@ load_dotenv(find_dotenv())
 def home(request):
     """Renders the Home page if not logged in and user's dashboard if logged in"""
     if request.user.is_authenticated:
-        jobs = Job.objects.filter(author=request.user).all().order_by('company')
+        jobs = Job.objects.filter(author=request.user).all().order_by("company")
         context = {
-            "jobs": jobs, 
-            "skills": Skills.objects.all(), 
+            "jobs": jobs,
+            "skills": Skills.objects.all(),
             "pending_apps": jobs.filter(application_status="Not Yet Applied"),
             "submitted_apps": jobs.filter(application_status="Applied"),
-            }
+        }
 
         # add job form
         form = AddJobForm(request.POST or None, initial={"author": request.user})
@@ -33,7 +33,7 @@ def home(request):
             messages.success(request, "Job Created")
             form.save()
             return redirect("opportunities-home")
-    
+
         context["form"] = form
 
         return render(request, "opportunities/dashboard.j2", context)
@@ -49,7 +49,7 @@ def about(request):
 def jobs(request):
     """Renders the Jobs page"""
     context = {
-        "jobs": Job.objects.filter(author=request.user).all().order_by('company')
+        "jobs": Job.objects.filter(author=request.user).all().order_by("company")
     }
 
     # add job form
@@ -100,13 +100,15 @@ def update_job(request, job_id):
 
 @login_required
 def skills(request):
-    """Renders all skills"""
-    context = {"skills": Skills.objects.all().order_by('name')}
+    """Renders skills for the logged in user"""
+    context = {
+        "skills": Skills.objects.filter(user=request.user).all().order_by("name")
+    }
 
     # add a skill
-    form = AddSkillForm(request.POST or None)
+    form = AddSkillForm(request.POST or None, initial={"user": request.user})
     if form.is_valid():
-        messages.success(request, "Thanks for contributing to our skills database")
+        messages.success(request, "Congrats on learning a new skill")
         form.save()
         return redirect("opportunities-skills")
 
@@ -132,8 +134,12 @@ def dashboard(request):
 
 @login_required
 def contacts(request):
-    """Renders all skills"""
-    context = {"contacts": Contacts.objects.filter(user=request.user).all().order_by('company_name')}
+    """Renders all contacts for a logged in user"""
+    context = {
+        "contacts": Contacts.objects.filter(user=request.user)
+        .all()
+        .order_by("company_name")
+    }
 
     # create new contact
     form = AddContactForm(request.POST or None, initial={"user": request.user})
@@ -168,7 +174,7 @@ def update_contact(request, contacts_id):
 
 @login_required
 def delete_contact(request, contacts_id):
-    """Deletes a skill"""
+    """Deletes a contact"""
     contact = get_object_or_404(Contacts, id=contacts_id)
     contact.delete()
     messages.success(request, "Contact removed from your network")
