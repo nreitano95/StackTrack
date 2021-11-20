@@ -36,6 +36,33 @@ def home(request):
 
         context["form"] = form
 
+        # Pie Chart of User's Skills
+        # Create list of the foreign keys for the user's job's skills
+        user_skills_fks = jobs.values_list('skills', flat=True)
+        
+        # Create a list of the values of the names of the user's job's skills
+        user_skills = []
+        for skill_fk in user_skills_fks:
+            skill = Skills.objects.get(id=skill_fk)
+            user_skills.append(skill.name)
+
+        # Generate data for the pie chart
+        # Get the count of each skill from the my_
+        data = []
+        seen = []
+        for skill in user_skills:
+            if skill not in seen:
+                data.append(user_skills.count(skill))
+                seen.append(skill)
+
+        # Generate labels for pie chart
+        labels = []
+        labels = list(set(user_skills))
+
+        # Set context fields for pie chart
+        context["data"] = data
+        context["labels"] = labels
+        
         return render(request, "opportunities/dashboard.j2", context)
     return render(request, "opportunities/home.j2")
 
@@ -179,3 +206,6 @@ def delete_contact(request, contacts_id):
     contact.delete()
     messages.success(request, "Contact removed from your network")
     return redirect("opportunities-contacts")
+
+
+
