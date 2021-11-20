@@ -1,3 +1,4 @@
+from typing import OrderedDict
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
@@ -57,7 +58,7 @@ def home(request):
 
         # Generate labels for pie chart
         labels = []
-        labels = list(set(user_skills))
+        labels = list(OrderedDict.fromkeys(user_skills))
 
         # Set context fields for pie chart
         context["data"] = data

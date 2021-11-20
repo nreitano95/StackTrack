@@ -129,9 +129,7 @@
         </div>
         </div>
 
-
     {% endif %}
-
 
 </div>
 
@@ -139,28 +137,23 @@
         <div class="card-header">
             <h3>My Skills</h3>
         </div>
-        {% if not skills %}
+        {% if not labels %}
             <div class="card-body">
                 <h5 class="card-title">No skills currently tracked</h5>
             </div>
         </div>
     {% else %}
 
-    {% for my_skill in my_skills %}
-        <h1>{{my_skill}}</h1>
-    {%endfor%}
-
     <div class="card-deck">
         <div class="card">
             <div class="card-body">
-            <h5 class="card-title">Skills Currently Tracked</h5>
-            <canvas id="skills-pie-chart"></canvas>
+                <h5 class="card-title">Skills Currently Tracked</h5>
+                <canvas id="skills-pie-chart"></canvas>
+            </div>
         </div>
     </div>
 
-
     {% endif %}
-
 
 </div>
 
