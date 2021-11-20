@@ -133,11 +133,13 @@
 
 </div>
 
+<div class="container">
+    {# My Skills Card #}
     <div class="card text-center">
         <div class="card-header">
             <h3>My Skills</h3>
         </div>
-        {% if not labels %}
+    {% if not labels %}
             <div class="card-body">
                 <h5 class="card-title">No skills currently tracked</h5>
             </div>
@@ -152,11 +154,9 @@
             </div>
         </div>
     </div>
-
-    {% endif %}
-
 </div>
 
+    {% endif %}
 
 
   <script>
