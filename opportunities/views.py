@@ -28,7 +28,7 @@ def home(request):
             "submitted_apps": jobs.filter(application_status="Applied"),
         }
 
-        # add job form
+        # Create Job Modal
         form = AddJobForm(request.POST or None, initial={"author": request.user})
         if form.is_valid():
             messages.success(request, "Job Created")
@@ -43,9 +43,13 @@ def home(request):
         
         # Create a list of the values of the names of the user's job's skills
         user_skills = []
-        for skill_fk in user_skills_fks:
-            skill = Skills.objects.get(id=skill_fk)
-            user_skills.append(skill.name)
+        
+        try: 
+            for skill_fk in user_skills_fks:
+                skill = Skills.objects.get(id=skill_fk)
+                user_skills.append(skill.name)
+        except:
+            pass
 
         # Generate data for the pie chart
         # Get the count of each skill from the my_
@@ -80,7 +84,7 @@ def jobs(request):
         "jobs": Job.objects.filter(author=request.user).all().order_by("company")
     }
 
-    # add job form
+    # Create Job Modal
     form = AddJobForm(request.POST or None, initial={"author": request.user})
     if form.is_valid():
         messages.success(request, "Job Created")
