@@ -42,6 +42,9 @@ class AddSkillForm(forms.ModelForm):
             "name",
         ]
 
+        # widgets
+        widgets = {"user": forms.HiddenInput()}
+
 
 class AddContactForm(forms.ModelForm):
     class Meta:
