@@ -188,3 +188,7 @@ a:hover {
     padding: .1em;
   }
 }
+
+.table th {
+  cursor: pointer;
+}
