@@ -105,11 +105,20 @@
                             <td>{{ job.title }}</td>
                             <td class="d-none d-lg-table-cell" >{{ job.employment_type }}</td>
                             <td class="d-none d-lg-table-cell" >${{ job.salary }}</td>
-                            <td class="d-none d-lg-table-cell" >{{ job.description }}</td>
+                            <td class="d-none d-lg-table-cell" >                                
+                                {% if not job.description %}
+                                    None</td>
+                                {% else %}
+                                    {{ job.description }}</td>
+                                {% endif %}
                             <td class="d-none d-lg-table-cell" >
-                                {% for skill in job.skills.all %}
-                                    {{skill}},
-                                {% endfor %}
+                                {% if not job.skills.all %}
+                                    None</td>
+                                {% else %}
+                                    {% for skill in job.skills.all %}
+                                        {{skill}},
+                                    {% endfor %}
+                                {% endif %}
                             </td>
                             <td class="d-none d-md-table-cell">{{ job.application_status }}</td>
                             <td class="d-none d-md-table-cell" >{{job.application_date|date:'Y-m-d'}}</td>

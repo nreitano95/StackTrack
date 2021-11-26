@@ -56,6 +56,7 @@ class AddContactForm(forms.ModelForm):
             "last_name",
             "company_name",
             "email",
+            "phone",
         ]
 
         widgets = {"user": forms.HiddenInput()}
