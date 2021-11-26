@@ -85,7 +85,7 @@
             <div class="row mt-5">
             <div class="col-md-12">
                 <table class="table table-hover table-responsive" id="sortTable">
-                    <thead class="thead-dark">
+                    <thead class="thead">
                         <tr>
                             <th onclick="sortTable(0)">Company</th>
                             <th onclick="sortTable(1)">Title</th>
@@ -129,10 +129,60 @@
         </div>
         </div>
 
+    {% endif %}
+
+</div>
+
+<div class="container">
+    {# My Skills Card #}
+    <div class="card text-center">
+        <div class="card-header">
+            <h3>My Skills</h3>
+        </div>
+    {% if not labels %}
+            <div class="card-body">
+                <h5 class="card-title">No skills currently tracked</h5>
+            </div>
+        </div>
+    {% else %}
+
+    <div class="card-deck">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Skills Currently Tracked</h5>
+                <canvas id="skills-pie-chart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
 
     {% endif %}
 
 
-</div>
+  <script>
+
+    var config = {
+      type: 'pie',
+      data: {
+        datasets: [{
+          data: {{ data|safe }},
+          backgroundColor: [
+            '#ADD7F6', '#87BFFF', '#72ACFD', '#5C8DFF', '#9388E7','#ADD7F6', '#87BFFF', '#72ACFD', '#5C8DFF', '#9388E7','#ADD7F6', '#87BFFF', '#72ACFD', '#5C8DFF', '#9388E7',
+          ],
+          label: 'Skills'
+        }],
+        labels: {{ labels|safe }}
+      },
+      options: {
+        responsive: true
+      }
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('skills-pie-chart').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+    };
+
+  </script>
 
 {% endblock content %}

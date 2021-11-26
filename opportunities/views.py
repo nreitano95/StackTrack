@@ -1,3 +1,4 @@
+from typing import OrderedDict
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
@@ -27,7 +28,7 @@ def home(request):
             "submitted_apps": jobs.filter(application_status="Applied"),
         }
 
-        # add job form
+        # Create Job Modal
         form = AddJobForm(request.POST or None, initial={"author": request.user})
         if form.is_valid():
             messages.success(request, "Job Created")
@@ -36,6 +37,37 @@ def home(request):
 
         context["form"] = form
 
+        # Pie Chart of User's Skills
+        # Create list of the foreign keys for the user's job's skills
+        user_skills_fks = jobs.values_list('skills', flat=True)
+        
+        # Create a list of the values of the names of the user's job's skills
+        user_skills = []
+        
+        try: 
+            for skill_fk in user_skills_fks:
+                skill = Skills.objects.get(id=skill_fk)
+                user_skills.append(skill.name)
+        except:
+            pass
+
+        # Generate data for the pie chart
+        # Get the count of each skill from the my_
+        data = []
+        seen = []
+        for skill in user_skills:
+            if skill not in seen:
+                data.append(user_skills.count(skill))
+                seen.append(skill)
+
+        # Generate labels for pie chart
+        labels = []
+        labels = list(OrderedDict.fromkeys(user_skills))
+
+        # Set context fields for pie chart
+        context["data"] = data
+        context["labels"] = labels
+        
         return render(request, "opportunities/dashboard.j2", context)
     return render(request, "opportunities/home.j2")
 
@@ -52,7 +84,7 @@ def jobs(request):
         "jobs": Job.objects.filter(author=request.user).all().order_by("company")
     }
 
-    # add job form
+    # Create Job Modal
     form = AddJobForm(request.POST or None, initial={"author": request.user})
     if form.is_valid():
         messages.success(request, "Job Created")
@@ -179,3 +211,6 @@ def delete_contact(request, contacts_id):
     contact.delete()
     messages.success(request, "Contact removed from your network")
     return redirect("opportunities-contacts")
+
+
+
