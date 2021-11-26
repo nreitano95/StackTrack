@@ -108,7 +108,7 @@
                             <td class="d-none d-lg-table-cell" >{{ job.description }}</td>
                             <td class="d-none d-lg-table-cell" >
                                 {% for skill in job.skills.all %}
-                                    {{skill}}
+                                    {{skill}},
                                 {% endfor %}
                             </td>
                             <td class="d-none d-md-table-cell">{{ job.application_status }}</td>
