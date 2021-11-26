@@ -57,7 +57,7 @@
                             <th onclick="sortTable(0)">Company</th>
                             <th onclick="sortTable(1)">Title</th>
                             <th class="d-none d-lg-table-cell" onclick="sortTable(2)">Employment Type</th>
-                            <th class="d-none d-lg-table-cell" onclick="sortTable(3)">Salary</th>
+                            <th class="d-none d-lg-table-cell" onclick="sortTable(3)">Annual Salary</th>
                             <th class="d-none d-lg-table-cell" onclick="sortTable(4)">Description</th>
                             <th class="d-none d-lg-table-cell" onclick="sortTable(5)">Skills</th>
                             <th class="d-none d-md-table-cell" onclick="sortTable(6)">Application Status</th>
@@ -71,7 +71,7 @@
                             <td>{{ job.company }}</td>
                             <td>{{ job.title }}</td>
                             <td class="d-none d-lg-table-cell" >{{ job.employment_type }}</td>
-                            <td class="d-none d-lg-table-cell" >{{ job.salary }}</td>
+                            <td class="d-none d-lg-table-cell" >${{ job.salary }}</td>
                             <td class="d-none d-lg-table-cell" >{{ job.description }}</td>
                             <td class="d-none d-lg-table-cell" >
                                 {% for skill in job.skills.all %}

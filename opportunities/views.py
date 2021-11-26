@@ -24,7 +24,7 @@ def home(request):
         context = {
             "jobs": jobs,
             "skills": Skills.objects.all(),
-            "pending_apps": jobs.filter(application_status="Not Yet Applied"),
+            "pending_apps": jobs.filter(application_status="Not Yet Applied") | jobs.filter(application_status="Interviewing"),
             "submitted_apps": jobs.filter(application_status="Applied"),
         }
 
