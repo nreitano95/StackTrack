@@ -56,6 +56,7 @@ class Contacts(models.Model):
     last_name = models.CharField(max_length=255)
     company_name = models.CharField(max_length=255)
     email = models.CharField(max_length=255, blank=True, null=True)
+    phone = models.CharField(max_length=30, blank=True, null=True)
 
     def __str__(self) -> str:
         return f"{self.first_name}|{self.last_name}"

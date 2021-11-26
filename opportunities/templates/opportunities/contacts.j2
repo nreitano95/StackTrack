@@ -57,6 +57,7 @@
                             <th onclick="sortTable(1)">Last name</th>
                             <th onclick="sortTable(2)">Email</th>
                             <th onclick="sortTable(3)">Company</th>
+                            <th onclick="sortTable(4)">Phone</th>
                             <th colspan="2"></th>
                         </tr>
                     </thead>
@@ -67,6 +68,7 @@
                             <td>{{ contact.last_name }}</td>
                             <td>{{ contact.email }}</td>
                             <td>{{ contact.company_name }}</td>
+                            <td>{{ contact.phone }}</td>
                             <td>
                             <!-- Update a contact -->
                             <a href="{% url 'opportunities-update-contact' contacts_id=contact.id %}" class="btn btn-secondary">Update</a>
